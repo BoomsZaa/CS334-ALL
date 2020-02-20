@@ -16,7 +16,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 ///////////////////////////////////////////////////////////////////
 float Celsius = 0;
 #define SensorPin A0            //pH meter Analog output to Arduino Analog Input 0
-#define Offset 0.00            //deviation compensate
+#define Offset 0.00           //deviation compensate
 #define samplingInterval 20
 #define printInterval 800
 #define ArrayLenth  40    //times of collection
@@ -65,7 +65,7 @@ void loop() {
     Serial.print("    pH value: ");
     Serial.print(pHValue, 2);
     Serial.print("    Tem value: ");
-    Serial.print(Celsius);
+    Serial.print(Celsius, 2);
     Serial.print(" C  ");
     Serial.println();
     printTime = millis();
@@ -81,11 +81,11 @@ void loop() {
   lcd.print(Celsius);
   lcd.setCursor(11, 1);
   lcd.print("C");
-  delay(2000);
+  //  delay(2000);
 
-  if (pHValue >= 9) {
-    LINE.notify("ค่า pH เกินที่กำหนดไว้ : "+String(pHValue));
-    LINE.notify("อุณหภูมิ : "+String(Celsius));
+  if (pHValue >= 10) {
+    LINE.notify("\nค่า pH เกินที่กำหนดไว้ : " + String(pHValue) + "\nอุณหภูมิ : " + String(Celsius));
+    //    LINE.notify("อุณหภูมิ : "+String(Celsius));
   }
 }
 
